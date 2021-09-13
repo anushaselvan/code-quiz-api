@@ -1,14 +1,13 @@
 var startButton = document.querySelector(".start-Button");
 var text =  document.querySelector("#main");
-
+var h1El = document.querySelector("h1");
+var scoreEl = document.querySelector("p");
+var initialsEl = document.createElement("div");
+var txtArea = document.createElement("textarea");
+var submitButton = document.createElement("button");
 var isWin = false;
-//var question1 = "Which of the following is not a Java feature?";
-//var optionList1 =  ["1. Dynamic", "2. Architectural neuetral", "3. Obect-oriented", "4. Use of pointers"];
-//var question2 = "What method of the class.class is used to determine the name of a class represented by the class object as a string?"
-//var optionList2 = ["1. getClass()", "2. intern()", "3. getName()", "4. toString()"];
-//var correctAnswer = ["4. Use of pointers", "3. getName()"];
-
-
+var correct = "Correct!";
+var score = 0;
 
 var questions = ["Which of the following is not a Java feature?", "What method of the class.class is used to determine the name of a class represented by the class object as a string?", "In JavaScript, what is a block of statement?", "Which of the following type of a variable is volatile?"];
 var currentQuestion = questions[0];
@@ -79,6 +78,7 @@ button13.setAttribute("style", "background-color: lightblue; margin:1% 35%; padd
 button14.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
 button15.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
 button16.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
+submitButton.setAttribute("style", "background-color: gold; margin:1% 35%; padding:8px; font-size: 20px; border-radius:6px; display:block");
 
 
 var i = 0;
@@ -140,28 +140,47 @@ function renderQuestion(){
 
 function correctAnswer(){
     console.log("Correct");
+    //text.textContent = correct;
+    score = score + 10;
     i++;
 
-    if( i <= questions.length)
-    currentQuestion = questions[i];
-
-    renderQuestion();
-    
+    if( i < questions.length){
+        currentQuestion = questions[i];
+        renderQuestion();
+    }
+    else { 
+    showResult();
+    }  
 }
+
 function wrongAnswer(){
 console.log("wrong");
 i++;
-    if( i <= questions.length){
+    if( i < questions.length){
 currentQuestion = questions[i];
     renderQuestion();
     }
+    else {
+        showResult();
+    }
 }
 
+function showResult(){
+    text.textContent = "";
+    h1El.textContent = "All done!";
+    initialsEl.textContent = "Enter initials:";
+    initialsEl.setAttribute("style", "display: inline-block");
+    txtArea.textContent = "";
+    txtArea.setAttribute("style", "display: inline; margin-left:8px");
+    scoreEl.textContent = "Your final score is " + score;
+    submitButton.textContent = "Submit";
 
-
-
-
-
+    text.appendChild(h1El);
+    text.appendChild(scoreEl);
+    text.appendChild(initialsEl);
+    text.appendChild(txtArea);
+    text.appendChild(submitButton);
+}
 
 
 
@@ -183,69 +202,4 @@ button14.addEventListener("click", wrongAnswer);
 button15.addEventListener("click", wrongAnswer);
 button16.addEventListener("click", wrongAnswer);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//function startQuiz(){
-   // isWin = false;
-  //  timerCount = 5;
-//renderQuestion();
-//startTimer();
-
-
-/*
-function renderQuestion(){
-   makeButtons(optionList);
-   text.setAttribute("style", "font-size:30px");
-   text.textContent = question; 
-
-}
-
-
-function makeButtons(choice){
-    for(var i=0; i < choice.length; i++){
-        var btn,[i] = document.createElement("button");
-        btn[i].setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-        var t = document.createTextNode(choice[i]);
-        btn[i].append(t);
-document.body.appendChild(btn[i]);
-       }
-}
-
-function checkAnswer(){
-    var i = 0;
-    if(document.getElementById("button").clicked == true)
-    {
-   // var userAnswer = document.getElementById("button");
-    if(correctAnswer[i] === button.value){
-   // answerReveal.textContent = "Correct!";
-   //btn.setAttribute("style", "background-colour: lightgreen" );
-console.log("correct!");
-i++;
-}
-else {
-    console.log("wrong");
-    i++;
-}
-    }
-}*/
 
