@@ -1,13 +1,20 @@
 var startButton = document.querySelector(".start-Button");
 var text =  document.querySelector("#main");
 var h1El = document.querySelector("h1");
-var scoreEl = document.querySelector("p");
+var scoreEl = document.createElement("p");
 var initialsEl = document.createElement("div");
 var txtArea = document.createElement("textarea");
 var submitButton = document.createElement("button");
-var isWin = false;
+var timeEl = document.querySelector(".timer");
+ 
 var correct = "Correct!";
 var score = 0;
+var i = 0;
+var timeCount = 60;
+timeEl.textContent = "Time:"+timeCount;
+
+
+
 
 var questions = ["Which of the following is not a Java feature?", "What method of the class.class is used to determine the name of a class represented by the class object as a string?", "In JavaScript, what is a block of statement?", "Which of the following type of a variable is volatile?"];
 var currentQuestion = questions[0];
@@ -78,14 +85,12 @@ button13.setAttribute("style", "background-color: lightblue; margin:1% 35%; padd
 button14.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
 button15.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
 button16.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-submitButton.setAttribute("style", "background-color: gold; margin:1% 35%; padding:8px; font-size: 20px; border-radius:6px; display:block");
 
 
-var i = 0;
 
 
 function startQuiz(){
-    
+    startTimer();
 renderQuestion();
 
 }
@@ -141,39 +146,62 @@ function renderQuestion(){
 function correctAnswer(){
     console.log("Correct");
     //text.textContent = correct;
+
     score = score + 10;
     i++;
-
     if( i < questions.length){
         currentQuestion = questions[i];
         renderQuestion();
     }
     else { 
+        timeCount = 0;
     showResult();
     }  
 }
 
 function wrongAnswer(){
 console.log("wrong");
+timeCount = timeCount - 10;
 i++;
     if( i < questions.length){
 currentQuestion = questions[i];
     renderQuestion();
     }
     else {
+        timeCount = 0;
         showResult();
     }
 }
 
+function startTimer(){
+    var timerInterval = setInterval(function(){
+        
+        if(timeCount === 0){
+            clearInterval(timerInterval);
+            showResult();
+        }
+        else{
+            timeCount--;
+            timeEl.textContent = "Time:"+timeCount;
+        }
+    },1000);
+}
+
+
 function showResult(){
+    timeCount = 0;
     text.textContent = "";
     h1El.textContent = "All done!";
-    initialsEl.textContent = "Enter initials:";
-    initialsEl.setAttribute("style", "display: inline-block");
-    txtArea.textContent = "";
-    txtArea.setAttribute("style", "display: inline; margin-left:8px");
+    h1El.setAttribute("style", "text-align:left; max-width: 40%");
     scoreEl.textContent = "Your final score is " + score;
+    scoreEl.setAttribute("style", "text-align:left; max-width: 40%");
+    initialsEl.textContent = "Enter initials:";
+    initialsEl.setAttribute("style", "text-align:left; font-size: 20px; max-width: 40%");
+    txtArea.textContent = "";
+    txtArea.setAttribute("style", "display:block; justify-content:left");
     submitButton.textContent = "Submit";
+    submitButton.setAttribute("style", "background-color: gold; margin-top:20px; justify-content:left; padding:8px; font-size: 20px; border-radius:6px; display:block");
+
 
     text.appendChild(h1El);
     text.appendChild(scoreEl);

@@ -10,8 +10,13 @@ header a{
     display: inline-block;
     text-decoration: none;
     margin: 25px;
-    font-style:inherit;
     color: black;
+}
+.timer{
+    float: right;
+    font-size: 20px;
+    margin: 25px;
+
 }
 #main {
     max-width: 50%;
