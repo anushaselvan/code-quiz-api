@@ -6,12 +6,23 @@ var initialsEl = document.createElement("div");
 var txtArea = document.createElement("textarea");
 var submitButton = document.createElement("button");
 var timeEl = document.querySelector(".timer");
- 
+var highScore = document.querySelector("a");
+var backButton = document.createElement("button");
+var clearButton = document.createElement("button");
+var responseEl = document.createElement("span");
+
+
+
+var articleEl = document.createElement("article");
+articleEl.setAttribute("style", "color: slategray; border-style: solid; border-color: lightgray; border-top-color: slategray; margin-top: 80px; font-size: 20px" );
+var t = 0;
 var correct = "Correct!";
+var wrong = "Wrong!";
+var answerStatus = "";
 var score = 0;
 var i = 0;
 var timeCount = 60;
-timeEl.textContent = "Time:"+timeCount;
+timeEl.textContent = "Time:" + timeCount;
 
 
 
@@ -69,22 +80,22 @@ button16.textContent = "4. Immutable variable";
 
 
 
-button1.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button2.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button3.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button4.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button5.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button6.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button7.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button8.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button9.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button10.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button11.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button12.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button13.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button14.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button15.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
-button16.setAttribute("style", "background-color: lightblue; margin:1% 35%; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button1.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button2.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button3.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button4.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button5.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button6.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button7.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button8.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button9.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button10.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button11.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button12.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button13.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button14.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button15.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button16.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
 
 
 
@@ -99,9 +110,8 @@ function renderQuestion(){
 
     if (currentQuestion == questions[0])
     {
-        console.log("aa");
         text.textContent = questions[0];
-        text.setAttribute("style", "font-size:25px");
+        text.setAttribute("style", "font-size:25px; justify-content:left; max-width: 40%");
         text.appendChild(button1);
         text.appendChild(button2);
         text.appendChild(button3);
@@ -110,47 +120,50 @@ function renderQuestion(){
     }
    else if (currentQuestion == questions[1])
     {
-        console.log("bb");
         text.textContent = questions[1];
-        text.setAttribute("style", "font-size:25px");
+        text.setAttribute("style", "font-size:25px; justify-content:left; max-width: 40%");
         text.appendChild(button5);
         text.appendChild(button6);
         text.appendChild(button7);
         text.appendChild(button8);
+        articleEl.textContent = answerStatus;
+        text.appendChild(articleEl);
+
 
     }
     else if (currentQuestion == questions[2])
     {
-        console.log("cc");
         text.textContent = questions[2];
-        text.setAttribute("style", "font-size:25px");
+        text.setAttribute("style", "font-size:25px; justify-content:left; max-width: 40%");
         text.appendChild(button9);
         text.appendChild(button10);
         text.appendChild(button11);
         text.appendChild(button12);
+        articleEl.textContent = answerStatus;
+        text.appendChild(articleEl);
 
     }
     else if (currentQuestion == questions[3])
     {
-        console.log("dd");
         text.textContent = questions[3];
-        text.setAttribute("style", "font-size:25px");
+        text.setAttribute("style", "font-size:25px; justify-content:left; max-width: 40%");
         text.appendChild(button13);
         text.appendChild(button14);
         text.appendChild(button15);
         text.appendChild(button16);
+        articleEl.textContent = answerStatus;
+        text.appendChild(articleEl);
 
     }
 }
 
 function correctAnswer(){
-    console.log("Correct");
-    //text.textContent = correct;
 
     score = score + 10;
     i++;
     if( i < questions.length){
         currentQuestion = questions[i];
+        answerStatus = correct;
         renderQuestion();
     }
     else { 
@@ -160,11 +173,11 @@ function correctAnswer(){
 }
 
 function wrongAnswer(){
-console.log("wrong");
 timeCount = timeCount - 10;
 i++;
     if( i < questions.length){
 currentQuestion = questions[i];
+answerStatus = wrong;
     renderQuestion();
     }
     else {
@@ -189,6 +202,7 @@ function startTimer(){
 
 
 function showResult(){
+    
     timeCount = 0;
     text.textContent = "";
     h1El.textContent = "All done!";
@@ -196,11 +210,11 @@ function showResult(){
     scoreEl.textContent = "Your final score is " + score;
     scoreEl.setAttribute("style", "text-align:left; max-width: 40%");
     initialsEl.textContent = "Enter initials:";
-    initialsEl.setAttribute("style", "text-align:left; font-size: 20px; max-width: 40%");
+    initialsEl.setAttribute("style", "text-align:left; font-size: 20px ; max-width: 40%");
     txtArea.textContent = "";
     txtArea.setAttribute("style", "display:block; justify-content:left");
     submitButton.textContent = "Submit";
-    submitButton.setAttribute("style", "background-color: gold; margin-top:20px; justify-content:left; padding:8px; font-size: 20px; border-radius:6px; display:block");
+    submitButton.setAttribute("style", "background-color: lemonchiffon; margin-top: 20px; justify-content:left; padding:8px; font-size: 20px; border-radius:6px; display:block");
 
 
     text.appendChild(h1El);
@@ -208,6 +222,59 @@ function showResult(){
     text.appendChild(initialsEl);
     text.appendChild(txtArea);
     text.appendChild(submitButton);
+}
+
+function saveScore(){
+    userDetails = {
+        userName: txtArea.value.trim(),
+        score: score
+    };
+    localStorage.setItem("userDetails", JSON.stringify(userDetails));
+}
+
+function renderScore(){
+    t++;
+    text.textContent = "";
+    h1El.textContent = "Highscores";
+
+    backButton.textContent = "Go Back!";
+    backButton.setAttribute("style", "background-color: lemonchiffon; margin-top: 20px;margin-right: 20px; justify-content:left; padding:8px; font-size: 20px; border-radius:6px; display: inline");
+    clearButton.textContent = "Clear Highscores";
+    clearButton.setAttribute("style", "background-color: lemonchiffon; margin-top: 20px; justify-content: right; padding:8px; font-size: 20px; border-radius:6px; display: inline");
+    text.appendChild(h1El);
+
+    var lastUser = JSON.parse(localStorage.getItem("userDetails"));
+
+    if(lastUser !== null){
+        console.log("here");
+    responseEl.textContent = t +"."+"  "+ lastUser.userName+ "  " +lastUser.score;    
+
+    }
+    
+    text.appendChild(responseEl);
+    text.appendChild(backButton);
+    text.appendChild(clearButton);
+}
+
+/*function viewScore(){
+
+text.textContent ="";
+    h1El.textContent = "Highscores";
+
+    backButton.textContent = "Go Back!";
+    backButton.setAttribute("style", "background-color: lemonchiffon; margin-top: 20px;margin-right: 20px; justify-content:left; padding:8px; font-size: 20px; border-radius:6px; display: inline");
+    clearButton.textContent = "Clear Highscores";
+    clearButton.setAttribute("style", "background-color: lemonchiffon; margin-top: 20px; justify-content: right; padding:8px; font-size: 20px; border-radius:6px; display: inline");
+    text.appendChild(h1El);
+    renderScore();
+
+    text.appendChild(backButton);
+    text.appendChild(clearButton);
+}
+*/
+
+function goHome(){
+    window.location.href="";
 }
 
 
@@ -229,5 +296,17 @@ button13.addEventListener("click", correctAnswer);
 button14.addEventListener("click", wrongAnswer);
 button15.addEventListener("click", wrongAnswer);
 button16.addEventListener("click", wrongAnswer);
+submitButton.addEventListener("click", function(){
+    
+    saveScore();
+    resetForm();
+     });
+highScore.addEventListener("click", renderScore);
+backButton.addEventListener("click", goHome);
 
-
+function resetForm(){
+//txtArea.value = null;
+responseEl.textContent = "Your score is saved!"
+responseEl.setAttribute("style", "text-align:left; display:block; font-size:20px");
+text.appendChild(responseEl);
+}
