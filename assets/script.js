@@ -10,11 +10,8 @@ var highScore = document.querySelector("a");
 var backButton = document.createElement("button");
 var clearButton = document.createElement("button");
 var responseEl = document.createElement("span");
-
-
-
 var articleEl = document.createElement("article");
-articleEl.setAttribute("style", "color: grey; border-style: solid; border-color: lightgrey; border-top-color: slategray; margin-top: 80px; font-size: 20px " );
+articleEl.setAttribute("style", "color: grey; border-style: solid; border-color: lightgrey; border-top-color: slategray; margin-top: 80px; font-size: 20px; opacity:0.5 " );
 var correct = "Correct!";
 var wrong = "Wrong!";
 var answerStatus = "";
@@ -22,9 +19,6 @@ var score = 0;
 var i = 0;
 var timeCount = 60;
 timeEl.textContent = "Time:" + timeCount;
-
-
-
 
 var questions = ["Which of the following is not a Java feature?", "What method of the class.class is used to determine the name of a class represented by the class object as a string?", "In JavaScript, what is a block of statement?", "Which of the following type of a variable is volatile?", "The 'function'  and 'var' are known as:"];
 var currentQuestion = questions[0];
@@ -88,10 +82,6 @@ button19.textContent = "3. Declaration statements";
 var button20 = document.createElement("button");
 button20.textContent = "4. Prototypes";
 
-
-
-
-
 button1.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
 button2.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
 button3.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
@@ -116,7 +106,7 @@ button20.setAttribute("style", "justify-content: Left; background-color: tan; ma
 
 function startQuiz(){
     startTimer();
-renderQuestion();
+    renderQuestion();
 
 }
 
@@ -189,23 +179,21 @@ function correctAnswer(){
     answerStatus = correct;   
     i++;
     if( i < questions.length){
-        currentQuestion = questions[i];
-            renderQuestion();
+             currentQuestion = questions[i];
+             renderQuestion();
             }
             else {
                 timeCount = 0;
                 showResult();
             }
 }
-
-
 
 function wrongAnswer(){
     timeCount = timeCount - 10;
     answerStatus = wrong;
     i++;
     if( i < questions.length){
-        currentQuestion = questions[i];
+            currentQuestion = questions[i];
             renderQuestion();
             }
             else {
@@ -214,22 +202,18 @@ function wrongAnswer(){
             }
 }
 
-
 function startTimer(){
     var timerInterval = setInterval(function(){
-       
-        if(timeCount === 0){
+       if(timeCount === 0){
             clearInterval(timerInterval);
             showResult();
         }
         else{
             timeCount--;
             timeEl.textContent = "Time:"+timeCount;
-        }
-        
+        } 
     },1000);
 }
-
 
 function showResult(){
     
@@ -245,8 +229,6 @@ function showResult(){
     txtArea.setAttribute("style", "display:block; justify-content:left");
     submitButton.textContent = "Submit";
     submitButton.setAttribute("style", "background-color: lemonchiffon; margin-top: 20px; justify-content:left; padding:8px; font-size: 20px; border-radius:6px; display:block");
-
-
     text.appendChild(h1El);
     text.appendChild(scoreEl);
     text.appendChild(initialsEl);
@@ -274,11 +256,9 @@ function renderScore(){
     text.appendChild(h1El);
 
     var lastUser = JSON.parse(localStorage.getItem("userDetails"));
-
     if(lastUser !== null){
         console.log("here");
     responseEl.textContent = t +"."+"  "+ lastUser.userName+ "  " +lastUser.score;    
-
     }
     if(lastUser === null){
         responseEl.textContent="";
@@ -288,81 +268,14 @@ function renderScore(){
     text.appendChild(clearButton);
 }
 
-/*
-function saveScore(){
-    for(var i=0;i<userDetails.length;i++){
-    localStorage.setItem("userDetails[i]", JSON.stringify(userDetails));
-}
-}
-
-
-function renderScore(){
-    text.textContent = "";
-    h1El.textContent = "Highscores";
-    backButton.textContent = "Go Back!";
-    backButton.setAttribute("style", "background-color: lemonchiffon; margin-top: 20px;margin-right: 20px; justify-content:left; padding:8px; font-size: 20px; border-radius:6px; display: inline");
-    clearButton.textContent = "Clear Highscores";
-    clearButton.setAttribute("style", "background-color: lemonchiffon; margin-top: 20px; justify-content: right; padding:8px; font-size: 20px; border-radius:6px; display: inline");
-    text.appendChild(h1El);
-    
-for(var t = 0; t < userDetails.length; t++){
-    var user = userDetails[t];
-   var li = document.createElement("li");
-   li.textContent = user;
-   li.setAttribute("data-index", t);
-   text.appendChild(li);
-}
-    //text.appendChild(responseEl);
-    text.appendChild(backButton);
-    text.appendChild(clearButton);
-}
-function render(){
-    for(var i=0;i<userDetails.length;i++){
-        var storedScore = JSON.parse(localStorage.getItem("userDetails[i]"));
-
-    if(storedScore !== null){
-        console.log("here");
-    
-userDetails = storedScore;
-console.log(userDetails);
-    }
-renderScore();
-    }
-}
-  
-    //responseEl.textContent = t +"."+"  "+ lastUser.userName+ "  " +lastUser.score;    
-    
-
-var userDetails = [];
-submitButton.addEventListener("click", function(event){
-    event.preventDefault();
-var user1 = {userName: txtArea.value.trim(), score: score};
-    if(user1 === "")
-    {return;}
-    userDetails.push(user1);
-    saveScore();
-    resetForm();
-     });
-
-
-//init()
-*/
-
 function goHome(){
-    //window.location.href="https://anushaselvan.github.io/CodeQuizAPI/";
+    window.location.href="https://anushaselvan.github.io/CodeQuizAPI/";
 }
 function emptyHighscore(){
     responseEl.textContent="";
     text.appendChild(responseEl);
     localStorage.clear();
-  
-
-    
-
-
 }
-
-
 
 startButton.addEventListener("click", startQuiz);
 button1.addEventListener("click", wrongAnswer);
@@ -386,16 +299,15 @@ button18.addEventListener("click", wrongAnswer);
 button19.addEventListener("click", correctAnswer);
 button20.addEventListener("click", wrongAnswer);
 submitButton.addEventListener("click", function(){
-    
-    saveScore();
-    resetForm();
-     });
+            saveScore();
+            resetForm();
+            });
 highScore.addEventListener("click", renderScore);
 backButton.addEventListener("click", goHome);
 clearButton.addEventListener("click", emptyHighscore);
 function resetForm(){
-txtArea.value = null;
-responseEl.textContent = "Your score is saved!"
-responseEl.setAttribute("style", "text-align:left; display:block; font-size:20px");
-text.appendChild(responseEl);
+        txtArea.value = null;
+        responseEl.textContent = "Your score is saved!"
+        responseEl.setAttribute("style", "text-align:left; display:block; font-size:20px");
+        text.appendChild(responseEl);
 }
