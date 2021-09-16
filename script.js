@@ -14,8 +14,7 @@ var responseEl = document.createElement("span");
 
 
 var articleEl = document.createElement("article");
-articleEl.setAttribute("style", "color: slategray; border-style: solid; border-color: lightgray; border-top-color: slategray; margin-top: 80px; font-size: 20px" );
-var t = 0;
+articleEl.setAttribute("style", "color: grey; border-style: solid; border-color: lightgrey; border-top-color: slategray; margin-top: 80px; font-size: 20px " );
 var correct = "Correct!";
 var wrong = "Wrong!";
 var answerStatus = "";
@@ -27,7 +26,7 @@ timeEl.textContent = "Time:" + timeCount;
 
 
 
-var questions = ["Which of the following is not a Java feature?", "What method of the class.class is used to determine the name of a class represented by the class object as a string?", "In JavaScript, what is a block of statement?", "Which of the following type of a variable is volatile?"];
+var questions = ["Which of the following is not a Java feature?", "What method of the class.class is used to determine the name of a class represented by the class object as a string?", "In JavaScript, what is a block of statement?", "Which of the following type of a variable is volatile?", "The 'function'  and 'var' are known as:"];
 var currentQuestion = questions[0];
 var button1 = document.createElement("button");
 button1.textContent = "1. Dynamic";
@@ -77,6 +76,19 @@ button15.textContent = "3. Volatile variable";
 var button16 = document.createElement("button");
 button16.textContent = "4. Immutable variable";
 
+var button17 = document.createElement("button");
+button17.textContent = "1. Keywords";
+
+var button18 = document.createElement("button");
+button18.textContent = "2. Data types";
+
+var button19 = document.createElement("button");
+button19.textContent = "3. Declaration statements";
+
+var button20 = document.createElement("button");
+button20.textContent = "4. Prototypes";
+
+
 
 
 
@@ -96,8 +108,10 @@ button13.setAttribute("style", "justify-content: Left; background-color: tan; ma
 button14.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
 button15.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
 button16.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
-
-
+button17.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button18.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button19.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
+button20.setAttribute("style", "justify-content: Left; background-color: tan; margin: 10px 10px 10px 40px; padding:8px; font-size: 18px; border-radius:6px; display:block");
 
 
 function startQuiz(){
@@ -116,6 +130,7 @@ function renderQuestion(){
         text.appendChild(button2);
         text.appendChild(button3);
         text.appendChild(button4);
+        
 
     }
    else if (currentQuestion == questions[1])
@@ -140,7 +155,7 @@ function renderQuestion(){
         text.appendChild(button11);
         text.appendChild(button12);
         articleEl.textContent = answerStatus;
-        text.appendChild(articleEl);
+        text.appendChild(articleEl);  
 
     }
     else if (currentQuestion == questions[3])
@@ -155,40 +170,54 @@ function renderQuestion(){
         text.appendChild(articleEl);
 
     }
+    else if (currentQuestion == questions[4])
+    {
+        text.textContent = questions[4];
+        text.setAttribute("style", "font-size:25px; justify-content:left; max-width: 40%");
+        text.appendChild(button17);
+        text.appendChild(button18);
+        text.appendChild(button19);
+        text.appendChild(button20);
+        articleEl.textContent = answerStatus;
+        text.appendChild(articleEl);
+
+    }
 }
 
 function correctAnswer(){
-
     score = score + 10;
+    answerStatus = correct;   
     i++;
     if( i < questions.length){
         currentQuestion = questions[i];
-        answerStatus = correct;
-        renderQuestion();
-    }
-    else { 
-        timeCount = 0;
-    showResult();
-    }  
+            renderQuestion();
+            }
+            else {
+                timeCount = 0;
+                showResult();
+            }
 }
 
+
+
 function wrongAnswer(){
-timeCount = timeCount - 10;
-i++;
+    timeCount = timeCount - 10;
+    answerStatus = wrong;
+    i++;
     if( i < questions.length){
-currentQuestion = questions[i];
-answerStatus = wrong;
-    renderQuestion();
-    }
-    else {
-        timeCount = 0;
-        showResult();
-    }
+        currentQuestion = questions[i];
+            renderQuestion();
+            }
+            else {
+                timeCount = 0;
+                showResult();
+            }
 }
+
 
 function startTimer(){
     var timerInterval = setInterval(function(){
-        
+       
         if(timeCount === 0){
             clearInterval(timerInterval);
             showResult();
@@ -197,6 +226,7 @@ function startTimer(){
             timeCount--;
             timeEl.textContent = "Time:"+timeCount;
         }
+        
     },1000);
 }
 
@@ -232,11 +262,11 @@ function saveScore(){
     localStorage.setItem("userDetails", JSON.stringify(userDetails));
 }
 
+
 function renderScore(){
-    t++;
+    var t=1;
     text.textContent = "";
     h1El.textContent = "Highscores";
-
     backButton.textContent = "Go Back!";
     backButton.setAttribute("style", "background-color: lemonchiffon; margin-top: 20px;margin-right: 20px; justify-content:left; padding:8px; font-size: 20px; border-radius:6px; display: inline");
     clearButton.textContent = "Clear Highscores";
@@ -250,31 +280,86 @@ function renderScore(){
     responseEl.textContent = t +"."+"  "+ lastUser.userName+ "  " +lastUser.score;    
 
     }
-    
+    if(lastUser === null){
+        responseEl.textContent="";
+    }
     text.appendChild(responseEl);
     text.appendChild(backButton);
     text.appendChild(clearButton);
 }
 
-/*function viewScore(){
+/*
+function saveScore(){
+    for(var i=0;i<userDetails.length;i++){
+    localStorage.setItem("userDetails[i]", JSON.stringify(userDetails));
+}
+}
 
-text.textContent ="";
+
+function renderScore(){
+    text.textContent = "";
     h1El.textContent = "Highscores";
-
     backButton.textContent = "Go Back!";
     backButton.setAttribute("style", "background-color: lemonchiffon; margin-top: 20px;margin-right: 20px; justify-content:left; padding:8px; font-size: 20px; border-radius:6px; display: inline");
     clearButton.textContent = "Clear Highscores";
     clearButton.setAttribute("style", "background-color: lemonchiffon; margin-top: 20px; justify-content: right; padding:8px; font-size: 20px; border-radius:6px; display: inline");
     text.appendChild(h1El);
-    renderScore();
-
+    
+for(var t = 0; t < userDetails.length; t++){
+    var user = userDetails[t];
+   var li = document.createElement("li");
+   li.textContent = user;
+   li.setAttribute("data-index", t);
+   text.appendChild(li);
+}
+    //text.appendChild(responseEl);
     text.appendChild(backButton);
     text.appendChild(clearButton);
 }
+function render(){
+    for(var i=0;i<userDetails.length;i++){
+        var storedScore = JSON.parse(localStorage.getItem("userDetails[i]"));
+
+    if(storedScore !== null){
+        console.log("here");
+    
+userDetails = storedScore;
+console.log(userDetails);
+    }
+renderScore();
+    }
+}
+  
+    //responseEl.textContent = t +"."+"  "+ lastUser.userName+ "  " +lastUser.score;    
+    
+
+var userDetails = [];
+submitButton.addEventListener("click", function(event){
+    event.preventDefault();
+var user1 = {userName: txtArea.value.trim(), score: score};
+    if(user1 === "")
+    {return;}
+    userDetails.push(user1);
+    saveScore();
+    resetForm();
+     });
+
+
+//init()
 */
 
 function goHome(){
-    window.location.href="";
+    //window.location.href="https://anushaselvan.github.io/CodeQuizAPI/";
+}
+function emptyHighscore(){
+    responseEl.textContent="";
+    text.appendChild(responseEl);
+    localStorage.clear();
+  
+
+    
+
+
 }
 
 
@@ -296,6 +381,10 @@ button13.addEventListener("click", correctAnswer);
 button14.addEventListener("click", wrongAnswer);
 button15.addEventListener("click", wrongAnswer);
 button16.addEventListener("click", wrongAnswer);
+button17.addEventListener("click", wrongAnswer);
+button18.addEventListener("click", wrongAnswer);
+button19.addEventListener("click", correctAnswer);
+button20.addEventListener("click", wrongAnswer);
 submitButton.addEventListener("click", function(){
     
     saveScore();
@@ -303,9 +392,9 @@ submitButton.addEventListener("click", function(){
      });
 highScore.addEventListener("click", renderScore);
 backButton.addEventListener("click", goHome);
-
+clearButton.addEventListener("click", emptyHighscore);
 function resetForm(){
-//txtArea.value = null;
+txtArea.value = null;
 responseEl.textContent = "Your score is saved!"
 responseEl.setAttribute("style", "text-align:left; display:block; font-size:20px");
 text.appendChild(responseEl);
