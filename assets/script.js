@@ -269,7 +269,7 @@ function renderScore(){
 }
 
 function goHome(){
-    document.location.href="file:///C:/Users/anush/CodeQuizAPI/index.html";
+    window.location.href="index.html";
 }
 function emptyHighscore(){
     responseEl.textContent="";
